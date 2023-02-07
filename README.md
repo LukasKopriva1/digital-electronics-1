@@ -1,5 +1,5 @@
 # digital-electronics-1
-## Vítejte na mém githubu.
+Vítejte na mém githubu.
 ---
 Alternatively, for H1 and H2, an underline-ish style:
 
