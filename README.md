@@ -1,7 +1,7 @@
 # digital-electronics-1
 Vítejte na mém githubu.
 ---
-
+1. počítačové cvičení
 Emphasis, aka italics, with *asterisks* or _underscores_.
 
 Strong emphasis, aka bold, with **asterisks** or __underscores__.
