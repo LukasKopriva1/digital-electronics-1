@@ -13,13 +13,8 @@
    ![K-maps](images/AmorethanB.PNG)
 
 2. Mark the largest possible implicants in the K-map and according to them, write the equations of simplified SoP (Sum of the Products) form of the "greater than" function and simplified PoS (Product of the Sums) form of the "less than" function.
-\begin{align*}
-greater_{SoP}^{min} =&~ b\cdot \overline{a_{1}}+b_{1} \cdot 
-b_{0}\cdot \overline{a_{0}} + b_{0}\cdot \overline{a_{1}}\cdot 
-\overline{a_{0}}\\
-less_{PoS}^{min} =(a_{0}+a_{1})\cdot(\overline{b_{1}}+\overline{b_{0}})\cdot(\overline{b_{0}}+a_{1})\cdot(\overline)&\\
-\end{align*}
-   ![Logic functions](images/comparator_min.png)
+
+   ![Logic functions](images/rovnice.png)
 
 ### 4-bit comparator
 
