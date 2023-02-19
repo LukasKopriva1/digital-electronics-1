@@ -1,4 +1,4 @@
-# Lab 2: INSERT_YOUR_FIRSTNAME INSERT_YOUR_LASTNAME
+# Lab 2: Lukáš Kopřiva
 
 ### 2-bit comparator
 
@@ -6,7 +6,7 @@
 
    Greater than:
 
-   ![K-maps](images/BmorethanA-1.PNG)
+   ![K-maps](images/BmorethanA-1.png)
 
    Less than:
 
