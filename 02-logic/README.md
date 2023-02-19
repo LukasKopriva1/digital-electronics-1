@@ -6,7 +6,7 @@
 
    Greater than:
 
-   ![K-maps](images/BmorethanA.PNG)
+   ![K-maps](images/BmorethanA-1.PNG)
 
    Less than:
 
