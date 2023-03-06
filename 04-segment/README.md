@@ -67,7 +67,7 @@ preparation
    -- ie 1, 2, 4, or 8
    LED(7) <= '1' when (SW = "0001") OR (SW = "0010") OR (SW = "0100") OR (SW = "1000") else '0'; -- WRITE YOUR CODE HERE
    led7 <= '1'   when (SW = "0001") OR (SW = "0010") OR (SW = "0100") OR (SW = "1000") else '0'; --used for better view in EPWave
- ```
+
 3. Screenshot with simulated time waveforms for LED(7:4). Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
    ![your figure]()
