@@ -18,7 +18,7 @@ preparation
    | E | 1110 | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
    | F | 1111 | 0 | 1 | 1 | 1 | 0 | 0 | 0 |
 
-# Lab 4: INSERT_YOUR_FIRSTNAME INSERT_YOUR_LASTNAME
+# Lab 4: Lukáš Kopřiva
 
 ### LED(7:4) indicators
 
@@ -70,4 +70,4 @@ preparation
 
 3. Screenshot with simulated time waveforms for LED(7:4). Always display all inputs and outputs (display the inputs at the top of the image, the outputs below them) at the appropriate time scale!
 
-   ![your figure]()
+   ![EPWave](epwave.PNG)
