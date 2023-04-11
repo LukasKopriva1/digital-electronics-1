@@ -42,13 +42,19 @@ entity top is
            CF : out STD_LOGIC;
            CG : out STD_LOGIC;
            AN : out STD_LOGIC_VECTOR (7 downto 0);
-           BTNC : in STD_LOGIC);
+           BTNC : in STD_LOGIC;
+           LED : out STD_LOGIC_VECTOR (15 downto 15)
+           );
 end top;
 
 architecture Behavioral of top is
 -- No internal signals are needed today:)
 begin
-
+  rx_tx_switch : entity work.rx_tx_switch
+      port map(
+          switch => SW(15),
+          ledka  => LED(15)
+      );
   --------------------------------------------------------
   -- Instance (copy) of driver_7seg_4digits entity
   --------------------------------------------------------
