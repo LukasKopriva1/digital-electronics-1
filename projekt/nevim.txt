@@ -1,0 +1,44 @@
+rx : process (vstup) is
+  begin
+    if (prepinac = '0') then
+        if (rst = '1') then                 -- High-active reset
+            sig_cerx_en <= '0';
+            sig_rst_cnt <= '0';
+        else
+            sig_cerx_en <= '1';
+        case sig_cnt_4bit is
+                when "1111" =>  --f
+                    -- bit 0 pro zahajeni prenosu
+                
+                when "1110" => -- e
+                    vysledek(0) <= vstup;
+
+                when "1101" => -- d
+                    vysledek(1) <= vstup;
+          
+                when "1100" => -- c
+                    vysledek(2) <= vstup;
+          
+                when "1011" => -- b
+                    vysledek(3) <= vstup;
+          
+                when "1010" => -- a
+                    vysledek(4) <= vstup;
+
+                when "1001" => -- 9
+                    vysledek(5) <= vstup;
+                
+                when "1000" => -- 8
+                    vysledek(6) <= vstup;
+                
+                when "0111" =>  -- 7
+                    vysledek(7) <= vstup;
+               
+                when others =>
+                    --sig_cerx_en <= '0';
+                    sig_rst_cnt <= '1';
+                    sig_rst_cnt <= '0';
+            end case;
+        end if;
+    end if;
+end process rx; 
