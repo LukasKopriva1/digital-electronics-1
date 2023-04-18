@@ -141,35 +141,35 @@ begin
         case sig_cnt_3bit is
 
           when "111" =>
-            sig_hex <= data0;
+            sig_hex <= data7;
             dig     <= "01111111";
             
           when "110" =>
-            sig_hex <= data1;
+            sig_hex <= data6;
             dig     <= "10111111"; 
 
           when "101" =>
-            sig_hex <= data2;
+            sig_hex <= data5;
             dig     <= "11011111";
           
           when "100" =>
-            sig_hex <= data3;
+            sig_hex <= data4;
             dig     <= "11101111";
           
           when "011" =>
-            sig_hex <= data4;
+            sig_hex <= data3;
             dig     <= "11110111";
           
           when "010" =>
-            sig_hex <= data5;
+            sig_hex <= data2;
             dig     <= "11111011";
           
           when "001" =>
-            sig_hex <= data6;
+            sig_hex <= data1;
             dig     <= "11111101";
           
           when others =>
-            sig_hex <= data7;
+            sig_hex <= data0;
             dig <= "11111110";
             -- DEFINE ALL OUTPUTS FOR "00" HERE
 
