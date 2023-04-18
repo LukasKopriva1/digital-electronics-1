@@ -110,14 +110,14 @@ begin
 
     report "Stimulus process started";
     sig_JA <= '1';
-    sig_switch(13) <= '0';
+    sig_switch(13) <= '1';
     sig_switch(12) <= '0';
     sig_switch(11) <= '0';
     sig_data <= "10000001";
-    sig_switch(15) <= '0';
+    sig_switch(15) <= '1';
     wait for 50ns;
     sig_data <= "10101010";
-    sig_switch(15) <= '0';
+    sig_switch(15) <= '1';
     --sig_JA <= '0';  -- start bit
     --wait for 40ns;
     sig_JA <= '1';  --0

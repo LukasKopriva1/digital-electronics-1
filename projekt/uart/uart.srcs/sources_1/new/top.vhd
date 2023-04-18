@@ -44,23 +44,25 @@ entity top is
            AN : out STD_LOGIC_VECTOR (7 downto 0);
            BTNC : in STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (15 downto 15);
-           NEJAKY : out STD_LOGIC;
-           nevim : out STD_LOGIC_VECTOR (7 downto 0);
+           -- NEJAKY : out STD_LOGIC; --simulace
+           --nevim : out STD_LOGIC_VECTOR (7 downto 0);
            JA : in STD_LOGIC_VECTOR (0 downto 0);
            JB : out STD_LOGIC_VECTOR (0 downto 0)
            );
 end top;
 
 architecture Behavioral of top is
+  signal sig_datap : std_logic_vector (7 downto 0);
 -- No internal signals are needed today:)
 begin
+
   rx_tx_switch : entity work.rx_tx_switch
       port map(
           switch => SW(15),
           ledka  => LED(15)
       );
   --------------------------------------------------------
-  -- Instance (copy) of driver_7seg_4digits entity
+  -- Instance (copy) of driver_7seg_4digits 
   --------------------------------------------------------
   driver_seg_4 : entity work.driver_7seg_8digits -- entity work.driver_7seg_8digits
       port map (
@@ -75,9 +77,12 @@ begin
           data4 => SW(4),
           data5 => SW(5),
           data6 => SW(6),
-          data7 => SW(7),          
+          data7 => SW(7), 
+          
+          datap => sig_datap,
+                   
 
-
+          prepinac => SW(15),
           -- DECIMAL POINT
           seg(6) => CA,
           seg(5) => CB,
@@ -97,7 +102,7 @@ begin
         prepinac => SW(15),
         clk => CLK100MHZ,
         rst => BTNC,
-        vystup => NEJAKY,
+        -- vystup => NEJAKY, -- simulace
         data0 => SW(0),
         data1 => SW(1),
         data2 => SW(2),
@@ -110,9 +115,9 @@ begin
         SW(2) => SW(13),
         SW(1) => SW(12),
         SW(0) => SW(11),
-        vysledek => nevim,
-        vstup => JA(0)
-        --vystup => JB(0)
+        vstup => JA(0),
+        vystup => JB(0), -- implementace
+        vysledek => sig_datap
         );
         
   --------------------------------------------------------

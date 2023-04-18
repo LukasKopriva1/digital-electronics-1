@@ -57,7 +57,9 @@ entity driver_7seg_8digits is
     data6   : in    std_logic;
     data7   : in    std_logic;
     seg     : out   std_logic_vector(6 downto 0);
-    dig     : out   std_logic_vector(7 downto 0)
+    dig     : out   std_logic_vector(7 downto 0);
+    datap   : in    std_logic_vector(7 downto 0);
+    prepinac : in std_logic
   );
 end entity driver_7seg_8digits;
 
@@ -86,7 +88,7 @@ begin
       -- FOR IMPLEMENTATION, CHANGE THIS VALUE TO 400,000
       -- 4      @ 4 ns
       -- 400000 @ 4 ms
-      g_max => 4
+      g_max => 200000
     )
     port map (
       clk => clk,-- WRITE YOUR CODE HERE
@@ -121,6 +123,7 @@ begin
       seg   => seg
     );
 
+ 
   --------------------------------------------------------
   -- p_mux:
   -- A sequential process that implements a multiplexer for
@@ -129,53 +132,96 @@ begin
   --------------------------------------------------------
   p_mux : process (clk) is
   begin
-
+   if(prepinac = '1') then
     if (rising_edge(clk)) then
       if (rst = '1') then
         sig_hex <= data0;
         dig     <= "11111110";
       else
-
         case sig_cnt_3bit is
 
           when "111" =>
-            sig_hex <= data7;
+            sig_hex <= data0;
             dig     <= "01111111";
             
           when "110" =>
-            sig_hex <= data6;
+            sig_hex <= data1;
             dig     <= "10111111"; 
 
           when "101" =>
-            sig_hex <= data5;
+            sig_hex <= data2;
             dig     <= "11011111";
           
           when "100" =>
-            sig_hex <= data4;
+            sig_hex <= data3;
             dig     <= "11101111";
           
           when "011" =>
-            sig_hex <= data3;
+            sig_hex <= data4;
             dig     <= "11110111";
           
           when "010" =>
-            sig_hex <= data2;
+            sig_hex <= data5;
             dig     <= "11111011";
           
           when "001" =>
-            sig_hex <= data1;
+            sig_hex <= data6;
             dig     <= "11111101";
           
           when others =>
-            sig_hex <= data0;
+            sig_hex <= data7;
             dig <= "11111110";
             -- DEFINE ALL OUTPUTS FOR "00" HERE
 
         end case;
-
+       end if;
       end if;
-    end if;
+     end if;
+------- konec pokud prepinac = 1
+if(prepinac = '0') then
+   if (rising_edge(clk)) then
+      if (rst = '1') then
+        sig_hex <= data0;
+        dig     <= "11111110";
+      else
+        case sig_cnt_3bit is
 
+          when "111" =>
+            sig_hex <= datap(0);
+            dig     <= "01111111";
+            
+          when "110" =>
+            sig_hex <= datap(1);
+            dig     <= "10111111"; 
+
+          when "101" =>
+            sig_hex <= datap(2);
+            dig     <= "11011111";
+          
+          when "100" =>
+            sig_hex <= datap(3);
+            dig     <= "11101111";
+          
+          when "011" =>
+            sig_hex <= datap(4);
+            dig     <= "11110111";
+          
+          when "010" =>
+            sig_hex <= datap(5);
+            dig     <= "11111011";
+          
+          when "001" =>
+            sig_hex <= datap(6);
+            dig     <= "11111101";
+          
+          when others =>
+            sig_hex <= datap(7);
+            dig <= "11111110";
+            
+         end case;
+    end if;
+   end if;
+  end if;
   end process p_mux;
 
 end architecture behavioral;

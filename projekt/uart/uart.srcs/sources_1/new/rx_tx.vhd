@@ -40,6 +40,7 @@ architecture behavioral of rx_tx is
     -- Interní reset
     signal sig_rst_cnt : std_logic;
     signal sig_rx_cnt : std_logic := '0';
+   -- signal vysledek : std_logic_vector(7 downto 0);
 
 begin
 
@@ -96,7 +97,7 @@ in_cnt1 : entity work.rx_cnt_up
 tx : process (clk) is
   begin
    if(rising_edge(clk)) then
-        else
+        
             if (prepinac = '1') then
             report "sig_cerx_en nastaven na 1";
             slovo(0) <= data0;
@@ -116,28 +117,28 @@ tx : process (clk) is
                     vystup <= '0';
 
                 when "1101" => -- d
-                    vystup <= slovo(7);
+                    vystup <= slovo(0);
           
                 when "1100" => -- c
-                    vystup <= slovo(6);
+                    vystup <= slovo(1);
           
                 when "1011" => -- b
-                    vystup <= slovo(5);
+                    vystup <= slovo(2);
           
                 when "1010" => -- a
-                    vystup <= slovo(4);
+                    vystup <= slovo(3);
 
                 when "1001" => -- 9
-                    vystup <= slovo(3);
+                    vystup <= slovo(4);
                 
                 when "1000" => -- 8
-                    vystup <= slovo(2);
+                    vystup <= slovo(5);
                 
                 when "0111" =>  -- 7
-                    vystup <= slovo(1);
+                    vystup <= slovo(6);
                 
                 when "0110" => -- 6
-                    vystup <= slovo(0);
+                    vystup <= slovo(7);
                     
                 when "0101" => -- 5
                     vystup <= '1';
