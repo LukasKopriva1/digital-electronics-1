@@ -55,8 +55,8 @@ p_bd_r_set : process (SW) is
                     clk_out <= 20834;
                 
                 when others => -- 2400
-                    clk_out <= 6; --simulaci
-                    --clk_out <= 41668;
+                    --clk_out <= 6; --simulaci
+                    clk_out <= 41668;
             end case;
 
   end process p_bd_r_set;

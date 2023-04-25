@@ -53,7 +53,7 @@ end top;
 
 architecture Behavioral of top is
   signal sig_datap : std_logic_vector (7 downto 0);
--- No internal signals are needed today:)
+  
 begin
 
   rx_tx_switch : entity work.rx_tx_switch
@@ -83,7 +83,7 @@ begin
                    
 
           prepinac => SW(15),
-          -- DECIMAL POINT
+          
           seg(6) => CA,
           seg(5) => CB,
           seg(4) => CC,
@@ -91,9 +91,7 @@ begin
           seg(2) => CE,
           seg(1) => CF,
           seg(0) => CG,
-          -- MAP OTHER DISPLAY SEGMENTS HERE
-
-
+          
           -- DIGITS
           dig(7 downto 0) => AN(7 downto 0)
       );
@@ -120,10 +118,5 @@ begin
         vysledek => sig_datap
         );
         
-  --------------------------------------------------------
-  -- Other settings
-  --------------------------------------------------------
-  -- Disconnect the top four digits of the 7-segment display
-  --AN(7 downto 4) <= b"1111";
 
 end architecture behavioral;

@@ -23,46 +23,46 @@ entity rx_tx is
 end rx_tx;
 
 architecture behavioral of rx_tx is
-
+    
+    -- Vnitrni signal pro vysilane slovo
     signal slovo    : STD_LOGIC_VECTOR(7 downto 0);
-    -- Internal clock enable
-    signal sig_en_2ms_tx : std_logic;
-    signal sig_en_2ms_rx : std_logic;
-    -- Internal 2-bit counter for multiplexing 4 digits
-    signal sig_cnt_4bit_tx : std_logic_vector(3 downto 0);
-    signal sig_cnt_4bit_rx_x16 : std_logic_vector(3 downto 0);
-    -- Internal 4-bit value
-    signal sig_hex : std_logic;
+    -- Vnitrni clock enable
+    signal sig_en_tx : std_logic;
+    signal sig_en_rx : std_logic;
+    -- vnitrni 4-bit citac pro multiplexing 8 digits
+    signal sig_cnt_4bit_tx : std_logic_vector(3 downto 0);     -- pro vysilac
+    signal sig_cnt_4bit_rx_x16 : std_logic_vector(3 downto 0); -- pro prijimac
     -- vnitrni propojeni nastaveni rychlosti
-    signal clock_set : natural;
-    signal clock_setx16 : natural;
-    -- povoleni clock_enable_rx pro rx vzdy zaple, tx vzdy nutno zapnout
+    signal clock_set : natural;      -- zakladni rychlost
+    signal clock_setx16 : natural;   -- 16x rychlejsi
+    -- signal pro zapnuti clock_enable_rx 
     signal sig_cerx_en : std_logic;
     -- Interní reset
     signal sig_rst_cnt : std_logic := '0';
     signal sig_rx_cnt : std_logic := '0';
    -- signal vysledek : std_logic_vector(7 downto 0);
-    signal pocitadlo : natural;
-    signal pocitadlo2 : natural;
+    -- pocitadla pro jednotlive funkce
+    signal pocitadlo : natural;  -- pocitadlo pro prijimac - vyber, kam zapsat prijaty bit
+    signal pocitadlo2 : natural; -- pocitadlo pro prijimac - detekce start bitu
 begin
 
 clock_setx16 <= clock_set /16;
 
-clk_en1 : entity work.clock_enable_rx -- pro prijem je 16x rychlejsi nez BD rate
+clk_en1 : entity work.clock_enable_rx
     port map (
-      clk => clk,-- WRITE YOUR CODE HERE
-      rst => rst,-- WRITE YOUR CODE HERE
-      ce  => sig_en_2ms_rx,
-      max => clock_setx16, -- pro normalni rychlost clock_set
+      clk => clk,
+      rst => rst,
+      ce  => sig_en_rx,
+      max => clock_setx16, -- rychlost citace je 16x rychlejsi nez nastaveny BD rate
       cerx_en => sig_cerx_en
     );
     
 clk_en2 : entity work.clock_enable_tx
     port map (
-      clk => clk,-- WRITE YOUR CODE HERE
-      rst => rst,-- WRITE YOUR CODE HERE
-      ce  => sig_en_2ms_tx,
-      max => clock_set
+      clk => clk,
+      rst => rst,
+      ce  => sig_en_tx,
+      max => clock_set -- rychlost citace je rovna nastavenemu BD rate
     );
 
 bd_rate_set : entity work.bd_rate_set
@@ -73,24 +73,24 @@ bd_rate_set : entity work.bd_rate_set
 
 bin_cnt_tx : entity work.tx_cnt_up
     generic map (
-      g_CNT_WIDTH => 4-- WRITE YOUR CODE HERE
+      g_CNT_WIDTH => 4
     )
     port map (
-      clk => clk,-- WRITE YOUR CODE HERE
+      clk => clk,
       rst => rst,
-      en => sig_en_2ms_tx,
+      en => sig_en_tx,
       cnt_up => '0',
       cnt => sig_cnt_4bit_tx
     );
     
 bin_cnt_rx_16x : entity work.rx_cnt_up
     generic map (
-      g_CNT_WIDTH => 4-- WRITE YOUR CODE HERE
+      g_CNT_WIDTH => 4
     )
     port map (
-      clk => clk,-- WRITE YOUR CODE HERE
+      clk => clk,
       rst => rst,
-      en => sig_en_2ms_rx,
+      en => sig_en_rx,
       cnt_up => '0',
       cnt => sig_cnt_4bit_rx_x16,
       int_rst => sig_rst_cnt,
