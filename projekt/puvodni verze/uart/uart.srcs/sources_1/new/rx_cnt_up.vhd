@@ -41,12 +41,12 @@ begin
   begin
 
     if rising_edge(clk) then
-      if (rst = '1' or int_rst = '1') then           -- Synchronous reset
+      if (rst = '1') then           -- Synchronous reset
         sig_cnt <= (others => '0'); -- Clear all bits
       elsif (en = '1') then         -- Test if counter is enabled
         if(cnt_en = '1') then
             -- TEST COUNTER DIRECTION HERE
-            if (cnt_up ='0') then
+            if (cnt_up ='1') then
             sig_cnt <= sig_cnt + 1;
             else
             sig_cnt <= sig_cnt -1;

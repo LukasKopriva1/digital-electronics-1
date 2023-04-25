@@ -30,26 +30,30 @@ architecture behavioral of rx_tx is
     signal sig_en_2ms_rx : std_logic;
     -- Internal 2-bit counter for multiplexing 4 digits
     signal sig_cnt_4bit_tx : std_logic_vector(3 downto 0);
-    signal sig_cnt_4bit_rx : std_logic_vector(3 downto 0);
+    signal sig_cnt_4bit_rx_x16 : std_logic_vector(3 downto 0);
     -- Internal 4-bit value
     signal sig_hex : std_logic;
     -- vnitrni propojeni nastaveni rychlosti
     signal clock_set : natural;
+    signal clock_setx16 : natural;
     -- povoleni clock_enable_rx pro rx vzdy zaple, tx vzdy nutno zapnout
     signal sig_cerx_en : std_logic;
     -- Interní reset
-    signal sig_rst_cnt : std_logic;
+    signal sig_rst_cnt : std_logic := '0';
     signal sig_rx_cnt : std_logic := '0';
    -- signal vysledek : std_logic_vector(7 downto 0);
-
+    signal pocitadlo : natural;
+    signal pocitadlo2 : natural;
 begin
 
-clk_en1 : entity work.clock_enable_rx
+clock_setx16 <= clock_set /16;
+
+clk_en1 : entity work.clock_enable_rx -- pro prijem je 16x rychlejsi nez BD rate
     port map (
       clk => clk,-- WRITE YOUR CODE HERE
       rst => rst,-- WRITE YOUR CODE HERE
       ce  => sig_en_2ms_rx,
-      max => clock_set,
+      max => clock_setx16, -- pro normalni rychlost clock_set
       cerx_en => sig_cerx_en
     );
     
@@ -67,7 +71,7 @@ bd_rate_set : entity work.bd_rate_set
         SW => SW
         );
 
-bin_cnt0 : entity work.tx_cnt_up
+bin_cnt_tx : entity work.tx_cnt_up
     generic map (
       g_CNT_WIDTH => 4-- WRITE YOUR CODE HERE
     )
@@ -79,7 +83,7 @@ bin_cnt0 : entity work.tx_cnt_up
       cnt => sig_cnt_4bit_tx
     );
     
-in_cnt1 : entity work.rx_cnt_up
+bin_cnt_rx_16x : entity work.rx_cnt_up
     generic map (
       g_CNT_WIDTH => 4-- WRITE YOUR CODE HERE
     )
@@ -88,7 +92,7 @@ in_cnt1 : entity work.rx_cnt_up
       rst => rst,
       en => sig_en_2ms_rx,
       cnt_up => '0',
-      cnt => sig_cnt_4bit_rx,
+      cnt => sig_cnt_4bit_rx_x16,
       int_rst => sig_rst_cnt,
       cnt_en => sig_cerx_en
     );    
@@ -156,55 +160,82 @@ tx : process (clk) is
  
  rx : process (clk, vstup) is
   begin
+if(rising_edge(clk))then
   if (prepinac = '0') then
-        --sig_cerx_en <= '0';
-        if(vstup = '0' and sig_rx_cnt = '0') then
+            -- kontrola nastaveni Vysilac/prijmac
+        if(vstup = '0' and sig_rx_cnt = '0') then -- pokud je vstup 0 a jeste sme nedetekovali start bit
             report "vstup 0";
-            sig_cerx_en <= '1';
-            sig_rx_cnt <= '1';
-        elsif(sig_rx_cnt = '1')then                
-             case sig_cnt_4bit_rx is
-                when "1111" =>  --f
-                    vysledek(0) <= vstup;
-                    report "vysledek 0";
+            sig_cerx_en <= '1';  -- aktivace citace pro prijimac
+            sig_rx_cnt <= '1';   -- zaznam do pameti, ze jsme detekovali start bit
+        elsif(sig_rx_cnt = '1')then          -- pokud jsme jiz detekovali start bit, tak se divame na hodnotu citace x16 a podle      
+             case sig_cnt_4bit_rx_x16 is
+                when "1000" => -- vystredeni citace
+                    if(pocitadlo2 = 0)then
+                    pocitadlo2 <= 1;
+                    if(pocitadlo = 0)then
+                        --sig_rst_cnt <= '1';
+                        pocitadlo <= 1;
+                    end if;
+                    if(pocitadlo > 0) then
+                    case pocitadlo is
+                        when 1 =>
+                            vysledek(0) <= vstup;
+                            pocitadlo <= 2;
+                            report "vysledek 0";
                 
-                when "1110" => -- e
-                    vysledek(1) <= vstup;
-                    report "vysledek 1";
+                        when 2 =>
+                            vysledek(1) <= vstup;
+                            pocitadlo <= 3;
+                            report "vysledek 1";
 
-                when "1101" => -- d
-                    vysledek(2) <= vstup;
-                    report "vysledek 2";
+                        when 3 => -- d
+                            vysledek(2) <= vstup;
+                            pocitadlo <= 4;
+                            report "vysledek 2";
           
-                when "1100" => -- c
-                    vysledek(3) <= vstup;
-                    report "vysledek 3";
+                        when 4 => -- c
+                            vysledek(3) <= vstup;
+                            pocitadlo <= 5;
+                            report "vysledek 3";
           
-                when "1011" => -- b
-                    vysledek(4) <= vstup;
-                    report "vysledek 4";
+                        when 5 => -- b
+                            vysledek(4) <= vstup;
+                            pocitadlo <= 6;
+                            report "vysledek 4";
           
-                when "1010" => -- a
-                    vysledek(5) <= vstup;
-                    report "vysledek 5";
+                        when 6 => -- a
+                            vysledek(5) <= vstup;
+                            pocitadlo <= 7;
+                            report "vysledek 5";
 
-                when "1001" => -- 9
-                    vysledek(6) <= vstup;
-                    report "vysledek 6";
+                        when 7 => -- 9
+                            vysledek(6) <= vstup;
+                            pocitadlo <= 8;
+                            report "vysledek 6";
                 
-                when "1000" => -- 8
-                    vysledek(7) <= vstup;
-                    report "vysledek 7";
+                        when 8 => -- 8
+                            vysledek(7) <= vstup;
+                            pocitadlo <= 9;
+                            report "vysledek 7";
                 
-                when "0000" =>
-                     sig_rx_cnt <= '1';              
+                        when others =>
+                            sig_rx_cnt <= '0';   -- resetovani detekce start bitu
+                            sig_cerx_en  <= '0'; -- deaktivace citace prijmu 
+                            pocitadlo <= 0;
+                        report "vynulovani";
+                    end case;
+                   end if;
+                  end if;
+                
+                when "1001" =>
+                    pocitadlo2 <= 0;
+                
                 when others =>
-                sig_rx_cnt <= '0';
-                report "vynulovani";
-            end case;
-           
+                    -- do nothing;    
+                end case;
         end if;
    end if;
+ end if;
 end process rx; 
 
 end architecture behavioral;

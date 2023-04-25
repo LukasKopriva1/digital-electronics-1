@@ -57,9 +57,7 @@ entity driver_7seg_8digits is
     data6   : in    std_logic;
     data7   : in    std_logic;
     seg     : out   std_logic_vector(6 downto 0);
-    dig     : out   std_logic_vector(7 downto 0);
-    datap   : in    std_logic_vector(7 downto 0);
-    prepinac : in std_logic
+    dig     : out   std_logic_vector(7 downto 0)
   );
 end entity driver_7seg_8digits;
 
@@ -123,7 +121,6 @@ begin
       seg   => seg
     );
 
- 
   --------------------------------------------------------
   -- p_mux:
   -- A sequential process that implements a multiplexer for
@@ -132,12 +129,13 @@ begin
   --------------------------------------------------------
   p_mux : process (clk) is
   begin
-   if(prepinac = '1') then
+
     if (rising_edge(clk)) then
       if (rst = '1') then
         sig_hex <= data0;
         dig     <= "11111110";
       else
+
         case sig_cnt_3bit is
 
           when "111" =>
@@ -174,54 +172,10 @@ begin
             -- DEFINE ALL OUTPUTS FOR "00" HERE
 
         end case;
-       end if;
+
       end if;
-     end if;
-------- konec pokud prepinac = 1
-if(prepinac = '0') then
-   if (rising_edge(clk)) then
-      if (rst = '1') then
-        sig_hex <= data0;
-        dig     <= "11111110";
-      else
-        case sig_cnt_3bit is
-
-          when "111" =>
-            sig_hex <= datap(0);
-            dig     <= "01111111";
-            
-          when "110" =>
-            sig_hex <= datap(1);
-            dig     <= "10111111"; 
-
-          when "101" =>
-            sig_hex <= datap(2);
-            dig     <= "11011111";
-          
-          when "100" =>
-            sig_hex <= datap(3);
-            dig     <= "11101111";
-          
-          when "011" =>
-            sig_hex <= datap(4);
-            dig     <= "11110111";
-          
-          when "010" =>
-            sig_hex <= datap(5);
-            dig     <= "11111011";
-          
-          when "001" =>
-            sig_hex <= datap(6);
-            dig     <= "11111101";
-          
-          when others =>
-            sig_hex <= datap(7);
-            dig <= "11111110";
-            
-         end case;
     end if;
-   end if;
-  end if;
+
   end process p_mux;
 
 end architecture behavioral;

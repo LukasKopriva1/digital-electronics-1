@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 16.04.2023 23:06:15
+-- Create Date: 04/11/2023 11:13:07 AM
 -- Design Name: 
--- Module Name: bd_rate_set - Behavioral
+-- Module Name: rx_tx_switch - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,34 +31,16 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity bd_rate_set is
-    Port ( SW : in STD_LOGIC_VECTOR (2 downto 0);
-           clk_out : out natural
-           
+entity rx_tx_switch is
+    Port ( switch : in STD_LOGIC;
+           ledka : out STD_LOGIC
            );
-end bd_rate_set;
+end rx_tx_switch;
 
-architecture Behavioral of bd_rate_set is
+architecture Behavioral of rx_tx_switch is
 
 begin
 
-p_bd_r_set : process (SW) is
-  begin
-
-    case SW is
-                when "000" =>  --9600
-                   -- clk_out <= 16; -- simulaci
-                   clk_out <= 10417;
-                
-                when "100" => -- 4800
-                    --clk_out <= 5; -- simulaci
-                    clk_out <= 20834;
-                
-                when others => -- 2400
-                    clk_out <= 6; --simulaci
-                    --clk_out <= 41668;
-            end case;
-
-  end process p_bd_r_set;
+ledka <= '1' when (switch = '1') else '0'; 
 
 end Behavioral;

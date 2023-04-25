@@ -69,8 +69,8 @@ begin
             SW(13) => sig_switch(13),
             SW(14) => sig_switch(14),
             SW(15) => sig_switch(15),
-            --NEJAKY => sig_nejaky,
-            --nevim => sig_vystup_tx,
+            NEJAKY => sig_nejaky,
+            nevim => sig_vystup_tx,
             JA(0) => sig_JA,
             JB(0) => sig_JB
            );
@@ -80,7 +80,7 @@ begin
   --------------------------------------------------------
   p_clk_gen : process is
     begin
-    while now < 1000000 ns loop -- 40 periods of 100MHz clock
+    while now < 40000 ns loop -- 40 periods of 100MHz clock
 
       sig_clk_100mhz <= '0';
       wait for c_CLK_100MHZ_PERIOD / 2;
@@ -108,37 +108,34 @@ begin
   p_stimulus : process is
   begin
 
--- wait for 160 ns; kdyz je BDrate na 16 -- minimum, jinak tb nefunguje
--- wait for 200 ns; když je BDrate na 20 atd
-
     report "Stimulus process started";
     sig_JA <= '1';
     sig_switch(13) <= '1';
     sig_switch(12) <= '0';
     sig_switch(11) <= '0';
     sig_data <= "10000001";
-    sig_switch(15) <= '0';
-    wait for 11ns;
+    sig_switch(15) <= '1';
+    wait for 50ns;
     sig_data <= "10101010";
-    sig_switch(15) <= '0';
-    sig_JA <= '0';  -- start bit
-    wait for 208340ns;
+    sig_switch(15) <= '1';
+    --sig_JA <= '0';  -- start bit
+    --wait for 40ns;
     sig_JA <= '1';  --0
-    wait for 208340ns;
+    wait for 40 ns;
     sig_JA <= '0';  --1
-    wait for 208340ns;
+    wait for 40ns;
     sig_JA <= '1';  --2
-    wait for 104170ns;
-    sig_JA <= '0';  --3
-    wait for 104170ns;
-    sig_JA <= '1';  --4
-    wait for 104170ns;
+    wait for 40ns;
+    sig_JA <= '1';  --3
+    wait for 40ns;
+    sig_JA <= '0';  --4
+    wait for 40ns;
     sig_JA <= '0';  --5
-    wait for 104170ns;
+    wait for 40ns;
     sig_JA <= '1';  --6
-    wait for 104170ns;
+    wait for 40ns;
     sig_JA <= '0';  --7
-    wait for 104170ns;
+    wait for 40ns;
     sig_JA <= '1';
     report "Stimulus process finished";
     wait;
