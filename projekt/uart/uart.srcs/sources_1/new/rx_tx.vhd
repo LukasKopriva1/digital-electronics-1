@@ -179,42 +179,42 @@ if(rising_edge(clk))then
                     if(pocitadlo > 0) then
                     case pocitadlo is
                         when 1 =>
-                            vysledek(0) <= vstup;
+                            vysledek(7) <= vstup;
                             pocitadlo <= 2;
                             report "vysledek 0";
                 
                         when 2 =>
-                            vysledek(1) <= vstup;
+                            vysledek(6) <= vstup;
                             pocitadlo <= 3;
                             report "vysledek 1";
 
                         when 3 => -- d
-                            vysledek(2) <= vstup;
+                            vysledek(5) <= vstup;
                             pocitadlo <= 4;
                             report "vysledek 2";
           
                         when 4 => -- c
-                            vysledek(3) <= vstup;
+                            vysledek(4) <= vstup;
                             pocitadlo <= 5;
                             report "vysledek 3";
           
                         when 5 => -- b
-                            vysledek(4) <= vstup;
+                            vysledek(3) <= vstup;
                             pocitadlo <= 6;
                             report "vysledek 4";
           
                         when 6 => -- a
-                            vysledek(5) <= vstup;
+                            vysledek(2) <= vstup;
                             pocitadlo <= 7;
                             report "vysledek 5";
 
                         when 7 => -- 9
-                            vysledek(6) <= vstup;
+                            vysledek(1) <= vstup;
                             pocitadlo <= 8;
                             report "vysledek 6";
                 
                         when 8 => -- 8
-                            vysledek(7) <= vstup;
+                            vysledek(0) <= vstup;
                             pocitadlo <= 9;
                             report "vysledek 7";
                 
