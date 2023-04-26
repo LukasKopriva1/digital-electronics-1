@@ -11,7 +11,10 @@ Enter a description of the problem and how to solve it.
 
 ## Popis hardwaru
 
+<<<<<<< HEAD
 Popis ovládacích prvků
+=======
+>>>>>>> b31fa57ab66bd8e066767b638bce7c215c5caa5d
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Popis softwaru
