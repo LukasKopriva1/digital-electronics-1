@@ -5,19 +5,21 @@
 * Aneta Bártková
 * Jan Socha
 
-## Teoretický popis a vysvětlení
+## Teoretický popis a vysvětlení problému
 
 Enter a description of the problem and how to solve it.
 
 ## Popis hardwaru
 
 <<<<<<< HEAD
-Popis ovládacích prvků
+Popis ovládacích prvků, vstup, výstup
 =======
 >>>>>>> b31fa57ab66bd8e066767b638bce7c215c5caa5d
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Popis softwaru
+
+
 
 Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
 
