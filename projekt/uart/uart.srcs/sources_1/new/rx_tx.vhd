@@ -67,7 +67,7 @@ clk_en2 : entity work.clock_enable_tx
 
 bd_rate_set : entity work.bd_rate_set
     port map(
-        clk_out => clock_set,
+        clk_out => clock_set, -- nacteni BD rate
         SW => SW
         );
 
@@ -98,13 +98,13 @@ bin_cnt_rx_16x : entity work.rx_cnt_up
     );    
     
   
-tx : process (clk) is
+tx : process (clk) is  -- vysilac
   begin
-   if(rising_edge(clk)) then
+   if(rising_edge(clk)) then  
         
-            if (prepinac = '1') then
-            report "sig_cerx_en nastaven na 1";
-            slovo(0) <= data0;
+            if (prepinac = '1') then  -- pokud je deska prepnuta do rezimu vysilace
+            report "sig_cerx_en nastaven na 1"; 
+            slovo(0) <= data0; -- nacteni vstupu do pameti
             slovo(1) <= data1;
             slovo(2) <= data2;
             slovo(3) <= data3;
@@ -113,15 +113,15 @@ tx : process (clk) is
             slovo(6) <= data6;
             slovo(7) <= data7;
             
-            case sig_cnt_4bit_tx is
-                when "1111" =>  --f
+            case sig_cnt_4bit_tx is -- multiplexovani vystupu
+                when "1111" =>  --f  -- pred stardbitem vzdy 1
                     vystup <= '1';
                 
                 when "1110" => -- e
-                    vystup <= '0';
+                    vystup <= '0';   -- start bit
 
                 when "1101" => -- d
-                    vystup <= slovo(0);
+                    vystup <= slovo(0);  -- vyslani LSB
           
                 when "1100" => -- c
                     vystup <= slovo(1);
@@ -142,10 +142,10 @@ tx : process (clk) is
                     vystup <= slovo(6);
                 
                 when "0110" => -- 6
-                    vystup <= slovo(7);
+                    vystup <= slovo(7);  -- vyslani MSB
                     
                 when "0101" => -- 5
-                    vystup <= '1';
+                    vystup <= '1';       -- vyplnove bity zajistujici odstup jednotlivych vysilani
                 
                 when "0000" => -- 0
                     vystup <= '1';
@@ -158,7 +158,7 @@ tx : process (clk) is
     end if;
  end process tx;
  
- rx : process (clk, vstup) is
+ rx : process (clk, vstup) is  -- prijimac
   begin
 if(rising_edge(clk))then
   if (prepinac = '0') then
@@ -169,15 +169,14 @@ if(rising_edge(clk))then
             sig_rx_cnt <= '1';   -- zaznam do pameti, ze jsme detekovali start bit
         elsif(sig_rx_cnt = '1')then          -- pokud jsme jiz detekovali start bit, tak se divame na hodnotu citace x16 a podle      
              case sig_cnt_4bit_rx_x16 is
-                when "1000" => -- vystredeni citace
-                    if(pocitadlo2 = 0)then
-                    pocitadlo2 <= 1;
-                    if(pocitadlo = 0)then
-                        --sig_rst_cnt <= '1';
-                        pocitadlo <= 1;
-                    end if;
-                    if(pocitadlo > 0) then
-                    case pocitadlo is
+                when "1000" => 
+                    if(pocitadlo2 = 0)then -- vystredeni citace, probiha pouze pri prvnim napocitani 8ky.
+                        pocitadlo2 <= 1;
+                        if(pocitadlo = 0)then -- pokud je pocitadlo rovno nule, zacneme pocitat prijate bity
+                            pocitadlo <= 1;   -- pokud jiz neni rovno nule, tak zaznamenavame bity zpravy
+                        end if;
+                    if(pocitadlo > 0) then -- pokud pocitadlo poradi bitu je vetsi jak 0, tedy je detekovan 
+                        case pocitadlo is
                         when 1 =>
                             vysledek(7) <= vstup;
                             pocitadlo <= 2;
