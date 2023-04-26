@@ -1,19 +1,19 @@
 
-### Team members
+### Členové týmu
 
-* Lukas Kopriva
-* Anet Bartkova
-* Member 3 (responsible for ...)
+* Lukáš Kopřiva
+* Aneta Bártková
+* Jan Socha
 
-## Theoretical description and explanation
+## Teoretický popis a vysvětlení
 
 Enter a description of the problem and how to solve it.
 
-## Hardware description of demo application
+## Popis hardwaru
 
 Insert descriptive text and schematic(s) of your implementation.
 
-## Software description
+## Popis softwaru
 
 Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
 
