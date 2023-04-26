@@ -4,7 +4,7 @@ library ieee;
   use ieee.numeric_std.all; -- Package for arithmetic operations
 
 ----------------------------------------------------------
--- Entity declaration for clock enable
+-- entita pro clock_enable prijimace
 ----------------------------------------------------------
 
 entity clock_enable_rx is
@@ -13,7 +13,7 @@ entity clock_enable_rx is
     rst : in    std_logic; --! High-active synchronous reset
     ce  : out   std_logic;  --! Clock enable pulse signal
     max : in natural;
-    cerx_en : in std_logic
+    cerx_en : in std_logic -- aktivacni signal
   );
 end entity clock_enable_rx;
 
@@ -30,12 +30,11 @@ begin
 
   --------------------------------------------------------
   -- p_clk_enable:
-  -- Generate clock enable signal. By default, enable signal
-  -- is low and generated pulse is always one clock long.
+  -- Generate clock enable signal.
   --------------------------------------------------------
   p_clk_enable : process (clk) is
   begin
-   if (cerx_en = '1') then
+   if (cerx_en = '1') then                -- kontrola aktivace citace
     if rising_edge(clk) then              -- Synchronous process
       if (rst = '1') then                 -- High-active reset
         sig_cnt <= 0;                     -- Clear local counter

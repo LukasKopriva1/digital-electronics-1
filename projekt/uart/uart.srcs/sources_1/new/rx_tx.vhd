@@ -171,11 +171,11 @@ if(rising_edge(clk))then
              case sig_cnt_4bit_rx_x16 is
                 when "1000" => 
                     if(pocitadlo2 = 0)then -- vystredeni citace, probiha pouze pri prvnim napocitani 8ky.
-                        pocitadlo2 <= 1;
+                           pocitadlo2 <= 1;
                         if(pocitadlo = 0)then -- pokud je pocitadlo rovno nule, zacneme pocitat prijate bity
                             pocitadlo <= 1;   -- pokud jiz neni rovno nule, tak zaznamenavame bity zpravy
                         end if;
-                    if(pocitadlo > 0) then -- pokud pocitadlo poradi bitu je vetsi jak 0, tedy je detekovan 
+                    if(pocitadlo > 0) then -- pokud pocitadlo poradi bitu je vetsi jak 0, tedy je detekovan start bit, tak nacitame vystupy pokazde, kdyz sig_cnt_4bit_rx_x16 je roven "1000"
                         case pocitadlo is
                         when 1 =>
                             vysledek(7) <= vstup;
@@ -226,7 +226,7 @@ if(rising_edge(clk))then
                    end if;
                   end if;
                 
-                when "1001" =>
+                when "1001" => 
                     pocitadlo2 <= 0;
                 
                 when others =>

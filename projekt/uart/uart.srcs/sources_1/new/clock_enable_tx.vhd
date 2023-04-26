@@ -4,7 +4,7 @@ library ieee;
   use ieee.numeric_std.all; -- Package for arithmetic operations
 
 ----------------------------------------------------------
--- Entity declaration for clock enable
+-- entita clock_enable vysilac
 ----------------------------------------------------------
 
 entity clock_enable_tx is
@@ -12,7 +12,7 @@ entity clock_enable_tx is
     clk : in    std_logic; --! Main clock
     rst : in    std_logic; --! High-active synchronous reset
     ce  : out   std_logic;  --! Clock enable pulse signal
-    max : in natural
+    max : in natural        -- nastaveni rychlosti
   );
 end entity clock_enable_tx;
 
