@@ -10,11 +10,12 @@
 Enter a description of the problem and how to solve it.
 
 ## Popis hardwaru
+V tomto projektu využíváme desku nexys a7-50t od firmy Nexys. Tato deska nabízí mnoho možných vstupů a výstupů.
+Námi použitými hlavními ovládacími prvky jsou přepínače. Dále jsme využili všechny sedmisegmentové displeje pro zobrazování odesílané/přijímané informace.
 
-<<<<<<< HEAD
+Přepínače máme rozděleny do tří částí. První (na obrázku hnědá) část stávající se z jednoho přepínače slouží k nastavení režimu vysílač/přijímač. Druhá část (červený rámeček) slouží k nastavení přenosové rychlosti. Více k této funkci v části instrukce. // vložit odkaz // Poslední část slouží k nastavení vysílaného slova o délce 8 bitů. Nastavené slovo se dá zkontrolovat na displeji. Tím se dostáváme k sedmisegmentovým displejům. Ty se přepínají podle zvolené 
 Popis ovládacích prvků, vstup, výstup
-=======
->>>>>>> b31fa57ab66bd8e066767b638bce7c215c5caa5d
+
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Popis softwaru
