@@ -1,4 +1,4 @@
-
+# VHDL projekt - UART
 ### Členové týmu
 
 * Lukáš Kopřiva
@@ -7,13 +7,25 @@
 
 ## Teoretický popis a vysvětlení problému
 
-Enter a description of the problem and how to solve it.
+UART (z anglického Universal asynchronous receiver-transmitter) je sběrnice, která slouží k asynchronnímu sériovému přenosu dat. K přenosu stačí dva drátky a nedochází k přenosu časového signálu. <br />
+
+#### Přenos vypadá následovně: <br />
+
+Nejdříve se vyšle start bit, který je reprezentován logickou 0. Následují bity přenášených dat. Po datech následuje paritní bit (dále parity bit), který je volitelný. Poslední odesílané bity jsou stop bity. Jejich počet je v některých aplikacích volitelný a je reprezentován logickou 1. <br />
+Pokud vysílač nevysílá informaci, tak je signál na logické 1, aby mohlo dojít k detekci start bitu. <br />
+
+#### Příklad přenosu:
+
+Chci přenést 8 bitovou zprávu (11100110), bez parity bitu s jedním stop bitem. <br />
+Nejdříve začnu start bitem 0, poté odešlu dané slovo 11100110 a poté následuje stop bit 1. Celá odesílaná sekvence tedy bude 0 1 1 1 0 0 1 1 0 1. <br />
+Na informačním kanále to vypadá poté nějak následnovně: <br />
+11111110111001101111111 <br />
 
 ## Popis hardwaru
 V tomto projektu využíváme desku nexys a7-50t od firmy Nexys. Tato deska nabízí mnoho možných vstupů a výstupů.
 Námi použitými hlavními ovládacími prvky jsou přepínače. Dále jsme využili všechny sedmisegmentové displeje pro zobrazování odesílané/přijímané informace.
 
-Přepínače máme rozděleny do tří částí. První (na obrázku hnědá) část stávající se z jednoho přepínače slouží k nastavení režimu vysílač/přijímač. Druhá část (červený rámeček) slouží k nastavení přenosové rychlosti. Více k této funkci v části instrukce. // vložit odkaz // Poslední část slouží k nastavení vysílaného slova o délce 8 bitů. Nastavené slovo se dá zkontrolovat na displeji. Tím se dostáváme k sedmisegmentovým displejům. Ty se přepínají podle zvolené 
+Přepínače máme rozděleny do tří částí. První (červený rámeček) část stávající se z jednoho přepínače slouží k nastavení režimu vysílač/přijímač. Druhá část (zelený rámeček) slouží k nastavení přenosové rychlosti. Více k této funkci [zde](#volba-rychlosti). Poslední část slouží k nastavení vysílaného slova o délce 8 bitů. Nastavené slovo se dá zkontrolovat na displeji. Tím se dostáváme k sedmisegmentovým displejům. Ty přepínají zobrazované informace podle nastaveného režimu (vysílač/přijímač).
 Popis ovládacích prvků, vstup, výstup
 
 Insert descriptive text and schematic(s) of your implementation.
@@ -34,7 +46,7 @@ Write descriptive text and simulation screenshots of your components.
 
 Nejdříve je potřeba si zvolit zda chceme vysílat nebo přijímat informace. To se nastavuje pomocí první páčky, která je na obrázku zvýrazněna červeným rámečkem.<br />
 
-![volba režimu](images/uart-packa2.png)
+![volba režimu](images/uart-packa1.png)
 
 Pro režim vysílání je nutno páčku přepnout nahoru. To nám indikuje i svítící led dioda nad touto páčkou.<br />
 Pokud chceme přijímat informace, páčku přepneme dolů a led dioda nám zhasne. <br />
@@ -61,16 +73,17 @@ Přijaté 8 bitové slovo se zobrazuje na osmi sedmisegmentových displejích.<b
 ### Režim odesílání dat
 
 Při odesílání dat si musíme dát pozor na nastavení přijímající strany! <br />
-Nastavení rychlosti odesílání je popsána [zde](#volba-rychlosti) <br />
+Nastavení rychlosti odesílání je popsáno [zde](#volba-rychlosti). <br />
 Vysílač má pevně nastavené parametry:
 * Délku slova: 8 bitů
 * Parity bit: ne
 * Ukončovací bit: 1 <br />
 
-K nastavení odesílaného slova slouží osm páček ve žlutém rámečku
-Na sedmisegmentových displejích se nyní zobrazuje odesílané 8 bitové slovo. Vysílač odesílá zprávu pořád dokola dokud není vypnut nebo přepnut na přijímání dat.
+K nastavení odesílaného slova slouží osm páček ve žlutém rámečku. Na sedmisegmentových displejích se nyní zobrazuje odesílané 8 bitové slovo. <br />
+Vysílač odesílá zprávu pořád dokola dokud není vypnut (odpojení od napájení) nebo přepnut na přijímání dat.
 
-
+### Video ukázka ovládání
+[![video zde](https://img.youtube.com/vi/H9e2rREXMPA/0.jpg)](https://youtu.be/H9e2rREXMPA)
 ## References
 
 1. Put here the literature references you used.
