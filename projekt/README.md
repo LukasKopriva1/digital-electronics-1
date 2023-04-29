@@ -34,7 +34,7 @@ Write descriptive text and simulation screenshots of your components.
 
 Nejdříve je potřeba si zvolit zda chceme vysílat nebo přijímat informace. To se nastavuje pomocí první páčky, která je na obrázku zvýrazněna červeným rámečkem.<br />
 
-![volba režimu](images/uart-packa1.png)
+![volba režimu](images/uart-packa2.png)
 
 Pro režim vysílání je nutno páčku přepnout nahoru. To nám indikuje i svítící led dioda nad touto páčkou.<br />
 Pokud chceme přijímat informace, páčku přepneme dolů a led dioda nám zhasne. <br />
