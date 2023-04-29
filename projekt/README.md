@@ -23,11 +23,12 @@ Na informačním kanále to vypadá poté nějak následnovně: <br />
 
 ## Popis hardwaru
 V tomto projektu využíváme desku nexys a7-50t od firmy Nexys. Tato deska nabízí mnoho možných vstupů a výstupů.
-Námi použitými hlavními ovládacími prvky jsou přepínače. Dále jsme využili všechny sedmisegmentové displeje pro zobrazování odesílané/přijímané informace.
+Námi použitými hlavními ovládacími prvky jsou přepínače.
+![packy](images/uart-packa1.png) <br />
+Přepínače máme rozděleny do tří částí. První (červený rámeček) část stávající se z jednoho přepínače slouží k nastavení režimu vysílač/přijímač. Druhá část (zelený rámeček) slouží k nastavení přenosové rychlosti. Více k této funkci [zde](#volba-rychlosti). Poslední část slouží k nastavení vysílaného slova o délce 8 bitů. Nastavené slovo se dá zkontrolovat na sedmisegmentových displejích.<br />
 
-Přepínače máme rozděleny do tří částí. První (červený rámeček) část stávající se z jednoho přepínače slouží k nastavení režimu vysílač/přijímač. Druhá část (zelený rámeček) slouží k nastavení přenosové rychlosti. Více k této funkci [zde](#volba-rychlosti). Poslední část slouží k nastavení vysílaného slova o délce 8 bitů. Nastavené slovo se dá zkontrolovat na displeji. Tím se dostáváme k sedmisegmentovým displejům. Ty přepínají zobrazované informace podle nastaveného režimu (vysílač/přijímač).
-Popis ovládacích prvků, vstup, výstup
-
+Vstup a výstup je na boku destičky. Pro větší přehlednost jsme využili piny JA(zelený rámček) a JB(červený rámeček). <br />
+![vstup/vystup pin](images/uart-IOpanel.PNG) <br/>
 Insert descriptive text and schematic(s) of your implementation.
 
 ## Popis softwaru
