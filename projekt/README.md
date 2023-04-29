@@ -28,8 +28,10 @@ Put flowchats/state diagrams of your algorithm(s) and direct links to source/tes
 
 Write descriptive text and simulation screenshots of your components.
 
-## Instructions
+## Návod k obsluze
 
+Nejdříve je potřeba si zvolit zda chceme vysílat nebo přijímat informace. To se nastavuje pomocí první páčky, která je na obrázku zvýrazněna červeným rámečkem.
+![volba režimu](../images/uart-packa1.png)
 Write an instruction manual for your application, including photos or a link to a video.
 
 ## References
