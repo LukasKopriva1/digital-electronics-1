@@ -31,7 +31,11 @@ Write descriptive text and simulation screenshots of your components.
 ## Návod k obsluze
 
 Nejdříve je potřeba si zvolit zda chceme vysílat nebo přijímat informace. To se nastavuje pomocí první páčky, která je na obrázku zvýrazněna červeným rámečkem.
-![volba režimu](../images/uart-packa1.PNG)
+
+![volba režimu](images/uart-packa1.png)
+
+Pro režim vysílání je nutno páčku přepnout nahoru. To nám indikuje i svítící led dioda nad touto páčkou.
+Pokud chceme přijímat informace, páčku přepneme dolů a led dioda nám zhasne.
 Write an instruction manual for your application, including photos or a link to a video.
 
 ## References
