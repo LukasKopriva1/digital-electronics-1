@@ -61,13 +61,15 @@ Přijaté 8 bitové slovo se zobrazuje na osmi sedmisegmentových displejích.<b
 ### Režim odesílání dat
 
 Při odesílání dat si musíme dát pozor na nastavení přijímající strany! <br />
+Nastavení rychlosti odesílání je popsána [zde](#volba-rychlosti) <br />
 Vysílač má pevně nastavené parametry:
 * Délku slova: 8 bitů
 * Parity bit: ne
 * Ukončovací bit: 1 <br />
 
-Rychlost odesílání je popsána [zde](###Volba rychlosti) <br />
-Write an instruction manual for your application, including photos or a link to a video.
+K nastavení odesílaného slova slouží osm páček ve žlutém rámečku
+Na sedmisegmentových displejích se nyní zobrazuje odesílané 8 bitové slovo. Vysílač odesílá zprávu pořád dokola dokud není vypnut nebo přepnut na přijímání dat.
+
 
 ## References
 
