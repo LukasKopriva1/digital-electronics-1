@@ -51,7 +51,22 @@ Přidání jiných rychlostí je možné pouze upravením souboru bd_rate_set.vh
 
 ### Režim přijímání dat
 
-V režimu přijímání dat uart
+Pro správné přijímání dat je potřeba správně nastavit rychlost přenosu. Dále je potřeba na vysílači nastavit:
+* Délku slova: 8 bitů
+* Parity bit: ne
+* Ukončovací bit: 1 <br />
+
+Přijaté 8 bitové slovo se zobrazuje na osmi sedmisegmentových displejích.<br />
+
+### Režim odesílání dat
+
+Při odesílání dat si musíme dát pozor na nastavení přijímající strany! <br />
+Vysílač má pevně nastavené parametry:
+* Délku slova: 8 bitů
+* Parity bit: ne
+* Ukončovací bit: 1 <br />
+
+Rychlost odesílání je popsána [zde](###Volba rychlosti) <br />
 Write an instruction manual for your application, including photos or a link to a video.
 
 ## References
