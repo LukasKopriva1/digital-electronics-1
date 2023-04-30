@@ -42,7 +42,6 @@ Poznámka: vysílač i přijímač jsou v jednom souboru s názvem rx_tx.vhd. <b
 
 #### Vysílač
 
-Vysílač vysílá 
 * ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
 
 ![diagram vysilac](images/diagram-tx.png)<br />
@@ -81,7 +80,7 @@ V plánu bylo sjednotit všechny čítače do jednoho typu a náležitě upravit
 
 V programu se objevují tři verze komponenty counter. První je ![základní verze](uart/uart.srcs/sources_1/new/cnt_up_down.vhd), která byla vytvořena během semestru a stará se o chod sedmisegmentového displeje. Další dvě verze se liší v:
 * tx_cnt_up nemá žádnou funkční změnu
-* rx_cnt_up má defaultně nastavené počítání od nejmenšího po největší, prozatím nepoužitou vlastnost interního resetu, která není zatím nijak implementována.
+* rx_cnt_up má defaultně nastavené počítání od nejmenšího po největší, dále má možnost interního resetu, který není závislý na resetu ostatních komponent, tedy na hlavním reset signálu. Poslední změnou je možnost deaktivace samotného čítače pomocí signálu cnt_en.
 
 ##### tx_cnt_up a základní verze
 
