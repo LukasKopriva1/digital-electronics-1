@@ -37,30 +37,63 @@ Insert schematic(s) of your implementation.
 
 ## Popis softwaru
 
+Z časových důvodů je ![simulační soubor](uart/uart.srcs/sim_1/new/tb_top.vhd) pouze pro simulaci top.vhd, ale díky tomuto simulačnímu soubrou, lze odsimulovat všechny komponenty.<br />
 Poznámka: vysílač i přijímač jsou v jednom souboru s názvem rx_tx.vhd. <br />
 
 #### Vysílač
+
+Vysílač vysílá 
 * ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
-* ![SIM soubor]() dodělat
 
 ![diagram vysilac](images/diagram-tx.png)<br />
 
 #### Přijímač
 * ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
-* ![SIM soubor]() dodělat
 
 ![diagram prijmac](images/diagram-rx.png)<br />
 
 #### Nastavení rychlosti
-* ![SRC soubor](uart/uart.srcs/sources_1/new/bd_rt_set.vhd)
-* ![SIM soubor]() dodělat
+* ![SRC soubor](uart/uart.srcs/sources_1/new/bd_rate_set.vhd)
 
-![diagram bd_rt_set](images/diagram-db.png)<br />
+![diagram bd_rt_set](images/diagram-bd.png)<br />
 
-#### všechny druhy clk enable
-#### všechny druhy counterů
+#### všechny druhy clk_enable
 
-Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
+V programu se objevují tři verze komponenty clock enable. První je základní verze, která byla vytvořena během semestru. Další verze se liší pouze ve dvou věcech:
+* clock_enable_rx má možnost aktivace/deaktivace pro účely přijímače, dále má možnost proměnného nastavení maximální hodnoty při běhu programu
+* clock_enable_tx má možnost nastavení maximální hodnoty při běhu programu
+
+V plánu bylo sjednotit všechny čítače do jednoho typu a náležitě upravit program. Na tento krok již z časových důvodů nedošlo.<br />
+
+##### clock_enable_rx
+
+* ![SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_rx.vhd)
+
+![diagram clock_enable_rx](images/diagram-clock-enable-rx.png)<br />
+
+##### clock_enable_tx
+
+* ![SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_tx.vhd)
+
+![diagram clock_enable_tx](images/diagram-clock-enable-tx.png)<br />
+
+#### všechny druhy čítačů
+
+V programu se objevují tři verze komponenty counter. První je ![základní verze](uart/uart.srcs/sources_1/new/cnt_up_down.vhd), která byla vytvořena během semestru a stará se o chod sedmisegmentového displeje. Další dvě verze se liší v:
+* tx_cnt_up nemá žádnou funkční změnu
+* rx_cnt_up má defaultně nastavené počítání od nejmenšího po největší, prozatím nepoužitou vlastnost interního resetu, která není zatím nijak implementována.
+
+##### tx_cnt_up a základní verze
+
+* ![tx_cnt_up](uart/uart.srcs/sources_1/new/tx_cnt_up.vhd)
+
+![diagram clock_enable_tx](images/diagram-clock-enable-tx.png)<br />
+
+#### rx_cnt_up
+
+* ![rx_cnt_up](uart/uart.srcs/sources_1/new/rx_cnt_up.vhd)
+
+![diagram clock_enable_rx](images/diagram-clock-enable-rx.png)<br />
 
 ### Component(s) simulation
 
