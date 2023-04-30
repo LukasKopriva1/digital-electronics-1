@@ -49,7 +49,7 @@ Poznámka: vysílač i přijímač jsou v jednom souboru s názvem rx_tx.vhd. <b
 #### Přijímač
 * ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
 
-![diagram prijmac](images/diagram-rx.png)<br />
+![diagram prijmac](images/diagram-rx-1.png)<br />
 
 #### Nastavení rychlosti
 * ![SRC soubor](uart/uart.srcs/sources_1/new/bd_rate_set.vhd)
@@ -110,13 +110,43 @@ Pokud je sig_cnt_4bit_tx rovno x tak na výstup přiřaď y:
 * 0 => 1
 
 
-![simulace vysílače](images/simulace-tx.png)<br />
+![simulace vysílače](images/simulace-tx.PNG)<br />
 
 #### Přijímač
 
 Přijímač detekuje start bit. Zapne si čítač (sig_cnt_4bit_rx_x16) pomocí signálu sig_cerx_en. Jakmile sig_cnt_4bit_rx_x16 je roven 8, tak se pocitadlo nastaví na 1 a pocitadlo2 na 1. Jakmile je sig_cnt_4bit_rx_x16 9, tak se pocitadlo2 nastaví na 0. Nyní se čeká dokud není sig_cnt_4bit_rx_x16 je roven 8. Jakmile je tahle podmínka splněna, tak se nastaví pocitadlo2 na 1 a zjisti se hodnota uložená v pocitadlo a provede se určený zápis do proměnné výsledek, a o jedno se zvíší hodnota proměnné pocitadlo. Jakmile je sig_cnt_4bit_rx_x16 roven 9, tak se deaktivuje zapisování, protože se změní pocitadlo2 na 0. Takto to probíhá dokud se nenapočítá pomocí pocitadlo hodnoty 9. Jakmile se napočítá devítky, tak se resetuje detekce start bitu pomocí nastavení sig_rx_cnt na 0, dále se vynuluje pocitadlo a deaktvijue se citac sig_cnt_4bit_rx_x16 pomocí nastavení sig_cerx_en na 0.
 
-![simulace přijímače/simulace-tx.png)<br />
+![simulace přijímače](images/simulace-tx.PNG)<br />
+
+#### Nastavení rychlosti
+
+Rychlost se nastavuje pomocí tří páček, kdy se ptáme co máme na vstupu a podle toho se přiřazuje výstupu nějaká hodnota.<br />
+
+![simulace nastavení rychlosti](images/simulace-bd-rate-set.PNG)<br />
+
+##### clock_enable_rx
+
+Tento clock enable má vstup clk, rst, max a cerx_en. Pomocí rst se resetuje, max nastavuje počet hodinových impulzů pro vyslání povolujícího signálu. V simulaci je max nastaven na 4, to znamená, že se uvnitř napočítají 3 impulzy hodinového signálu a na každý čtvrtý se nastavý výstupní signál na 1. Tento proces se opakuje pořád dokola, dokud je cerx_en roven 1. <br />
+
+![simulace clock_enable_rx](images/simulace-clock-en-rx.PNG)<br />
+
+##### clock_enable_tx
+
+Tento clock enable má oproti minulému o jeden vstup méně a to o cerx_en. Tedy funguje stejným způsobem, jen není možné ho vypnout.<br />
+
+![simulace clock_enable_tx](images/simulace-clock-en-tx.PNG)<br />
+
+##### tx_cnt_up
+
+Tento čítač počítá od 16 po 0, tedy dolů. Vždy, když přijde signál en, tak se hodnota sníží o jedno. <br />
+
+![simulace tx_cnt_up](images/simulace-tx-cnt-up.PNG)<br />
+
+#### rx_cnt_up
+
+Tento čítač se zapíná pomocí cnt_en, který není závislý na hodinovém signálu. Počítá od 0 do 16 tedy nahoru. Jinak pracuje stejně jako tx_cnt_up tedy, že při signálu en = 1 se hodnota zvíší o jedno. <br />
+
+![simulace rx_cnt_up](images/simulace-rx-cnt-up.PNG)<br />
 
 ## Návod k obsluze
 
