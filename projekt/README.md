@@ -54,7 +54,7 @@ Poznámka: vysílač i přijímač jsou v jednom souboru s názvem rx_tx.vhd. <b
 #### Nastavení rychlosti
 * ![SRC soubor](uart/uart.srcs/sources_1/new/bd_rate_set.vhd)
 
-![diagram bd_rt_set](images/diagram-bd.png)<br />
+![diagram bd_rt_set](images/diagram-bd-rate-set.png)<br />
 
 #### všechny druhy clk_enable
 
@@ -68,7 +68,7 @@ V plánu bylo sjednotit všechny čítače do jednoho typu a náležitě upravit
 
 * ![SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_rx.vhd)
 
-![diagram clock_enable_rx](images/diagram-clock-enable-rx.png)<br />
+![diagram clock_enable_rx](images/diagram-clock-en-rx.png)<br />
 
 ##### clock_enable_tx
 
@@ -92,7 +92,7 @@ V programu se objevují tři verze komponenty counter. První je ![základní ve
 
 * ![rx_cnt_up](uart/uart.srcs/sources_1/new/rx_cnt_up.vhd)
 
-![diagram clock_enable_rx](images/diagram-clock-enable-rx.png)<br />
+![diagram clock_enable_rx](images/diagram-rx-cnt-up.png)<br />
 
 ### Component(s) simulation
 
