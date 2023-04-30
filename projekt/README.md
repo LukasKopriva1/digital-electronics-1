@@ -17,7 +17,7 @@ Pokud vysílač nevysílá informaci, tak je signál na logické 1, aby mohlo do
 #### Příklad přenosu:
 
 Chci přenést 8 bitovou zprávu (11100110), bez parity bitu s jedním stop bitem. <br />
-Nejdříve začnu start bitem 0, poté odešlu dané slovo 11100110 a poté následuje stop bit 1. Celá odesílaná sekvence tedy bude 0 1 1 1 0 0 1 1 0 1. <br />
+Nejdříve začnu start bitem 0, poté odešlu dané slovo 11100110 a poté následuje stop bit 1. Celá odesílaná sekvence tedy bude 0111001101. <br />
 Na informačním kanále to vypadá poté nějak následnovně: <br />
 11111110111001101111111 <br />
 
