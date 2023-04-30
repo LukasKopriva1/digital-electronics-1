@@ -24,16 +24,41 @@ Na informačním kanále to vypadá poté nějak následnovně: <br />
 ## Popis hardwaru
 V tomto projektu využíváme desku nexys a7-50t od firmy Nexys. Tato deska nabízí mnoho možných vstupů a výstupů.
 Námi použitými hlavními ovládacími prvky jsou přepínače.
+
 ![packy](images/uart-packa1.png) <br />
+
 Přepínače máme rozděleny do tří částí. První (červený rámeček) část stávající se z jednoho přepínače slouží k nastavení režimu vysílač/přijímač. Druhá část (zelený rámeček) slouží k nastavení přenosové rychlosti. Více k této funkci [zde](#volba-rychlosti). Poslední část slouží k nastavení vysílaného slova o délce 8 bitů. Nastavené slovo se dá zkontrolovat na sedmisegmentových displejích.<br />
 
-Vstup a výstup je na boku destičky. Pro větší přehlednost jsme využili piny JA(zelený rámček) a JB(červený rámeček). <br />
+Vstup a výstup je na boku destičky. Pro větší přehlednost jsme využili piny JA(zelený rámček) a JB(červený rámeček). Pin JA slouží jako vstup pro vysílač a JB slouží jako výstup pro vysílač. <br />
+
 ![vstup/vystup pin](images/uart-IOpanel.PNG) <br/>
-Insert descriptive text and schematic(s) of your implementation.
+
+Insert schematic(s) of your implementation.
 
 ## Popis softwaru
 
+Poznámka: vysílač i přijímač jsou v jednom souboru s názvem rx_tx.vhd. <br />
 
+#### Vysílač
+* ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
+* ![SIM soubor]() dodělat
+
+![diagram vysilac](images/diagram-tx.png)<br />
+
+#### Přijímač
+* ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
+* ![SIM soubor]() dodělat
+
+![diagram prijmac](images/diagram-rx.png)<br />
+
+#### Nastavení rychlosti
+* ![SRC soubor](uart/uart.srcs/sources_1/new/bd_rt_set.vhd)
+* ![SIM soubor]() dodělat
+
+![diagram bd_rt_set](images/diagram-db.png)<br />
+
+#### všechny druhy clk enable
+#### všechny druhy counterů
 
 Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders. 
 
