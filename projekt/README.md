@@ -192,7 +192,9 @@ Vysílač odesílá zprávu pořád dokola dokud není vypnut (odpojení od nap�
 
 ### Video ukázka ovládání
 [![video zde](https://img.youtube.com/vi/H9e2rREXMPA/0.jpg)](https://youtu.be/H9e2rREXMPA)
+
 ## References
 
-1. Put here the literature references you used.
-2. ...
+1. Online nástroj pro tvorbu diagramů https://app.diagrams.net/
+2. https://cs.wikipedia.org/wiki/UART
+3. ![Ukázka důvodu počítání osmi časových impulzů](https://electronics.stackexchange.com/questions/207870/uart-receiver-sampling-rate)
