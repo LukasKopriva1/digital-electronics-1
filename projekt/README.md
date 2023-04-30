@@ -86,7 +86,7 @@ V programu se objevují tři verze komponenty counter. První je ![základní ve
 
 * ![tx_cnt_up](uart/uart.srcs/sources_1/new/tx_cnt_up.vhd)
 
-![diagram clock_enable_tx](images/diagram-clock-enable-tx.png)<br />
+![diagram tx_cnt_up](images/diagram-tx-cnt-up.png)<br />
 
 #### rx_cnt_up
 
@@ -94,9 +94,29 @@ V programu se objevují tři verze komponenty counter. První je ![základní ve
 
 ![diagram clock_enable_rx](images/diagram-rx-cnt-up.png)<br />
 
-### Component(s) simulation
+### Simulace
+#### Vysílač
+Vysílač vysílá postupně data z sig_data od sig_data(0) po sig_data(7). Řídí se signálem z čítače sig_cnt_4bit_tx a má pro jeho výstupní hodnoty nastaveno:<br />
+Pokud je sig_cnt_4bit_tx rovno x tak na výstup přiřaď y:
+* f => 1
+* e => 0 (start bit)
+* d => sig_data(0)
+* c => sig_data(1)
+* ...
+* 8 => sig_data(7)
+* 7 => 1 (stop bit)
+* 6 => 1
+* ...
+* 0 => 1
 
-Write descriptive text and simulation screenshots of your components.
+
+![simulace vysílače](images/simulace-tx.png)<br />
+
+#### Přijímač
+
+Přijímač detekuje start bit. Zapne si čítač (sig_cnt_4bit_rx_x16) pomocí signálu sig_cerx_en. Jakmile sig_cnt_4bit_rx_x16 je roven 8, tak se pocitadlo nastaví na 1 a pocitadlo2 na 1. Jakmile je sig_cnt_4bit_rx_x16 9, tak se pocitadlo2 nastaví na 0. Nyní se čeká dokud není sig_cnt_4bit_rx_x16 je roven 8. Jakmile je tahle podmínka splněna, tak se nastaví pocitadlo2 na 1 a zjisti se hodnota uložená v pocitadlo a provede se určený zápis do proměnné výsledek, a o jedno se zvíší hodnota proměnné pocitadlo. Jakmile je sig_cnt_4bit_rx_x16 roven 9, tak se deaktivuje zapisování, protože se změní pocitadlo2 na 0. Takto to probíhá dokud se nenapočítá pomocí pocitadlo hodnoty 9. Jakmile se napočítá devítky, tak se resetuje detekce start bitu pomocí nastavení sig_rx_cnt na 0, dále se vynuluje pocitadlo a deaktvijue se citac sig_cnt_4bit_rx_x16 pomocí nastavení sig_cerx_en na 0.
+
+![simulace přijímače/simulace-tx.png)<br />
 
 ## Návod k obsluze
 
