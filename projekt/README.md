@@ -116,7 +116,7 @@ Pokud je sig_cnt_4bit_tx rovno x tak na výstup přiřaď y:
 
 Přijímač detekuje start bit. Zapne si čítač (sig_cnt_4bit_rx_x16) pomocí signálu sig_cerx_en. Jakmile sig_cnt_4bit_rx_x16 je roven 8, tak se pocitadlo nastaví na 1 a pocitadlo2 na 1. Jakmile je sig_cnt_4bit_rx_x16 9, tak se pocitadlo2 nastaví na 0. Nyní se čeká dokud není sig_cnt_4bit_rx_x16 je roven 8. Jakmile je tahle podmínka splněna, tak se nastaví pocitadlo2 na 1 a zjisti se hodnota uložená v pocitadlo a provede se určený zápis do proměnné výsledek, a o jedno se zvíší hodnota proměnné pocitadlo. Jakmile je sig_cnt_4bit_rx_x16 roven 9, tak se deaktivuje zapisování, protože se změní pocitadlo2 na 0. Takto to probíhá dokud se nenapočítá pomocí pocitadlo hodnoty 9. Jakmile se napočítá devítky, tak se resetuje detekce start bitu pomocí nastavení sig_rx_cnt na 0, dále se vynuluje pocitadlo a deaktvijue se citac sig_cnt_4bit_rx_x16 pomocí nastavení sig_cerx_en na 0.
 
-![simulace přijímače](images/simulace-tx.PNG)<br />
+![simulace přijímače](images/simulace-rx.PNG)<br />
 
 #### Nastavení rychlosti
 
