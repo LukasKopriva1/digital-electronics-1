@@ -197,4 +197,4 @@ Vysílač odesílá zprávu pořád dokola dokud není vypnut (odpojení od nap�
 
 1. Online nástroj pro tvorbu diagramů https://app.diagrams.net/
 2. https://cs.wikipedia.org/wiki/UART
-3. ![Ukázka důvodu počítání osmi časových impulzů](https://electronics.stackexchange.com/questions/207870/uart-receiver-sampling-rate)
+3. [Ukázka důvodu počítání osmi časových impulzů](https://electronics.stackexchange.com/questions/207870/uart-receiver-sampling-rate)
