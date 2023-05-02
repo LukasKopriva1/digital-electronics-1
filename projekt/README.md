@@ -37,22 +37,22 @@ Insert schematic(s) of your implementation.
 
 ## Popis softwaru
 
-Z časových důvodů je ![simulační soubor](uart/uart.srcs/sim_1/new/tb_top.vhd) pouze pro simulaci top.vhd, ale díky tomuto simulačnímu soubrou, lze odsimulovat všechny komponenty.<br />
+Z časových důvodů je [simulační soubor](uart/uart.srcs/sim_1/new/tb_top.vhd) pouze pro simulaci top.vhd, ale díky tomuto simulačnímu soubrou, lze odsimulovat všechny komponenty.<br />
 Poznámka: vysílač i přijímač jsou v jednom souboru s názvem rx_tx.vhd. <br />
 
 #### Vysílač
 
-* ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
+* [SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
 
 ![diagram vysilac](images/diagram-tx.png)<br />
 
 #### Přijímač
-* ![SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
+* [SRC soubor](uart/uart.srcs/sources_1/new/rx_tx.vhd)
 
 ![diagram prijmac](images/diagram-rx-1.png)<br />
 
 #### Nastavení rychlosti
-* ![SRC soubor](uart/uart.srcs/sources_1/new/bd_rate_set.vhd)
+* [SRC soubor](uart/uart.srcs/sources_1/new/bd_rate_set.vhd)
 
 ![diagram bd_rt_set](images/diagram-bd-rate-set.png)<br />
 
@@ -66,31 +66,31 @@ V plánu bylo sjednotit všechny čítače do jednoho typu a náležitě upravit
 
 ##### clock_enable_rx
 
-* ![SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_rx.vhd)
+* [SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_rx.vhd)
 
 ![diagram clock_enable_rx](images/diagram-clock-en-rx.png)<br />
 
 ##### clock_enable_tx
 
-* ![SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_tx.vhd)
+* [SRC soubor](uart/uart.srcs/sources_1/new/clock_enable_tx.vhd)
 
 ![diagram clock_enable_tx](images/diagram-clock-enable-tx.png)<br />
 
 #### všechny druhy čítačů
 
-V programu se objevují tři verze komponenty counter. První je ![základní verze](uart/uart.srcs/sources_1/new/cnt_up_down.vhd), která byla vytvořena během semestru a stará se o chod sedmisegmentového displeje. Další dvě verze se liší v:
+V programu se objevují tři verze komponenty counter. První je [základní verze](uart/uart.srcs/sources_1/new/cnt_up_down.vhd), která byla vytvořena během semestru a stará se o chod sedmisegmentového displeje. Další dvě verze se liší v:
 * tx_cnt_up nemá žádnou funkční změnu
 * rx_cnt_up má defaultně nastavené počítání od nejmenšího po největší, dále má možnost interního resetu, který není závislý na resetu ostatních komponent, tedy na hlavním reset signálu. Poslední změnou je možnost deaktivace samotného čítače pomocí signálu cnt_en.
 
 ##### tx_cnt_up a základní verze
 
-* ![tx_cnt_up](uart/uart.srcs/sources_1/new/tx_cnt_up.vhd)
+* [tx_cnt_up](uart/uart.srcs/sources_1/new/tx_cnt_up.vhd)
 
 ![diagram tx_cnt_up](images/diagram-tx-cnt-up.png)<br />
 
 #### rx_cnt_up
 
-* ![rx_cnt_up](uart/uart.srcs/sources_1/new/rx_cnt_up.vhd)
+* [rx_cnt_up](uart/uart.srcs/sources_1/new/rx_cnt_up.vhd)
 
 ![diagram clock_enable_rx](images/diagram-rx-cnt-up.png)<br />
 
